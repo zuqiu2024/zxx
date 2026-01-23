@@ -8,9 +8,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 背景图片配置
 	src: {
 		// 桌面背景图片
-		desktop: "/assets/images/d1.webp",
+		desktop: "/assets/images/u=58695811,2435767813&fm=253&fmt=auto&app=138&f=JPEG.jpeg",
 		// 移动背景图片
-		mobile: "/assets/images/img_1_865x605_2_1757098648607.jpg",
+		mobile: "/assets/images/u=58695811,2435767813&fm=253&fmt=auto&app=138&f=JPEG.jpeg",
 	},
 	// Banner模式特有配置
 	banner: {
@@ -24,7 +24,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 是否启用主页横幅文字
 			enable: true,
 			// 主页横幅主标题
-			title: "Lovely firefly!",
+			title: "Love HenanFC",
 			// 主页横幅主标题字体大小
 			titleSize: "3.8rem",
 			// 主页横幅副标题
@@ -61,9 +61,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			},
 			text: {
 				// 桌面端要显示的来源文本
-				desktop: "Pixiv - 晚晚喵",
+				desktop: "HenanFC - 河南建业",
 				// 移动端要显示的来源文本
-				mobile: "Pixiv - KiraraShss",
+				mobile: "Henan - FC",
 			},
 			url: {
 				// 桌面端原始艺术品或艺术家页面的 URL 链接
