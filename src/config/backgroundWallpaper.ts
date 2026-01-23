@@ -29,12 +29,12 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			titleSize: "3.8rem",
 			// 主页横幅副标题
 			subtitle: [
-				"In Reddened Chrysalis, I Once Rest",
-				"From Shattered Sky, I Free Fall",
-				"Amidst Silenced Stars, I Deep Sleep",
-				"Upon Lighted Fyrefly, I Soon Gaze",
-				"From Undreamt Night, I Thence Shine",
-				"In Finalized Morrow, I Full Bloom",
+				"河南俱乐部酒祖杜康，建于1994年8月28日",
+				"河南队前身叫做河南省足球队便在1989年夺得甲A冠军",
+				"2006年，获得中甲冠军后首次升入中超",
+				"2009年，夺得中超联赛季军，并首次获得亚洲冠军联赛参赛资格",
+				"2025足协杯成为最大黑马，晋级决赛却惜败北京国安",
+				"中原铁军永不倒，建业精神代代传",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",
