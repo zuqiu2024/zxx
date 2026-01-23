@@ -37,10 +37,10 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 	local: {
 		playlist: [
 			{
-				name: "使一颗心免于哀伤",
-				artist: "知更鸟 / HOYO-MiX / Chevy",
-				url: "/assets/music/使一颗心免于哀伤-哼唱.wav",
-				cover: "/assets/music/cover/109951169585655912.jpg",
+				name: "荣耀建业",
+				artist: "建业队歌",
+				url: "/assets/music/5552_0353_0653_b8ca955ef849238a7e9c19ab90259924.m4a",
+				cover: "/assets/music/cover/u=58695811,2435767813&fm=253&fmt=auto&app=138&f=JPEG.jpeg",
 				// 歌词内容，支持 LRC 格式
 				lrc: "",
 			},
