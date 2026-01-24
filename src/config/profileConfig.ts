@@ -5,7 +5,7 @@ export const profileConfig: ProfileConfig = {
 	avatar: "/assets/images/u=58695811,2435767813&fm=253&fmt=auto&app=138&f=JPEG.jpeg",
 
 	// 名字
-	name: "Firefly",
+	name: "Zhanxx",
 
 	// 个人签名
 	bio: "This is Henan FC.",
