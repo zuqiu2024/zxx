@@ -2,13 +2,13 @@ import type { ProfileConfig } from "../types/config";
 
 export const profileConfig: ProfileConfig = {
 	// 头像
-	avatar: "/assets/images/avatar.webp",
+	avatar: "/assets/images/u=58695811,2435767813&fm=253&fmt=auto&app=138&f=JPEG.jpeg",
 
 	// 名字
 	name: "Firefly",
 
 	// 个人签名
-	bio: "Hello, I'm Firefly.",
+	bio: "This is Henan FC.",
 
 	// 链接配置
 	// 已经预装的图标集：fa6-brands，fa6-regular，fa6-solid，material-symbols，simple-icons
