@@ -5,7 +5,7 @@ backend:
   base_url: https://api.decapcms.org
   auth_type: implicit
   app_id: Ov23liGigiiDAG1BycQ3
-  site_domain: https://zhanxx81201.dpdns.org/
+  site_domain: https://zhanxx81201.dpdns.org
 
 media_folder: "public/assets/images/uploads"
 public_folder: "/assets/images/uploads"
