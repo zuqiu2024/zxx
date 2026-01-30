@@ -1,0 +1,26 @@
+backend:
+  name: github
+  repo: zuqiu2024/zxx
+  branch: master
+  base_url: https://api.decapcms.org
+  auth_type: implicit
+  app_id: Ov23liGigiiDAG1BycQ3
+  site_domain: https://zhanxx81201.dpdns.org
+
+media_folder: "public/assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+collections:
+  - name: "posts"
+    label: "文章"
+    folder: "src/content/post"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "标题", name: "title", widget: "string" }
+      - { label: "发布日期", name: "published", widget: "datetime" }
+      - { label: "摘要", name: "description", widget: "text" }
+      - { label: "封面图", name: "image", widget: "image", required: false }
+      - { label: "作者", name: "author", widget: "string", default: "展" }
+      - { label: "标签", name: "tags", widget: "list", default: ["班级风采", "校园"] }
+      - { label: "正文", name: "body", widget: "markdown" }
