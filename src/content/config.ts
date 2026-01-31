@@ -4,14 +4,11 @@ const posts = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    published: z.coerce.date(),  // 注意：用 published 不是 pubDate
-    pinned: z.boolean().optional().default(false),
+    published: z.coerce.date(),
     description: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    category: z.string().optional(),
-    draft: z.boolean().default(false),
-    image: z.string().optional(),  // 注意：用 image 不是 featuredImage
-    author: z.string().optional(),
+    image: z.string().optional(),
+    author: z.string().optional().default("展"),
   }),
 });
 
