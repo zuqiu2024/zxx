@@ -6,12 +6,12 @@ backend:
   auth_endpoint: api/auth
 
 # 媒体文件存储
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "public/images"
+public_folder: "/images"
 
-# 内容集合 - 匹配你的posts目录
+# 内容集合 - 精确匹配你的文章格式
 collections:
-  - name: "posts"  # 重要：这里必须是"posts"
+  - name: "posts"
     label: "博客文章"
     folder: "src/content/posts"
     create: true
@@ -20,20 +20,53 @@ collections:
     format: "frontmatter-md"
     extension: "md"
     
-    # 排序方式：按发布日期倒序
-    sortable_fields: ["pubDate"]
-    sort: "pubDate"
+    # 按发表日期排序
+    sortable_fields: ["published"]
+    sort: "published"
     order: "descending"
     
-    # 文章字段 - 根据Firefly主题的格式
+    # 关键：完全匹配你的文章字段
     fields:
-      - { label: "标题", name: "title", widget: "string" }
-      - { label: "发布日期", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: true }
-      - { label: "更新日期", name: "updatedDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: "HH:mm", required: false }
-      - { label: "描述", name: "description", widget: "string", required: false }
-      - { label: "标签", name: "tags", widget: "list", default: [], required: false }
-      - { label: "封面图片", name: "featuredImage", widget: "image", required: false }
-      - { label: "是否草稿", name: "draft", widget: "boolean", default: false }
+      - { label: "标题", name: "title", widget: "string", required: true }
+      
+      - label: "发布日期"
+        name: "published"
+        widget: "datetime"
+        format: "YYYY-MM-DD"
+        date_format: "YYYY-MM-DD"
+        time_format: false  # 不要时间部分
+        required: true
+      
+      - { label: "是否置顶", name: "pinned", widget: "boolean", default: false, required: false }
+      
+      - label: "描述"
+        name: "description"
+        widget: "text"
+        required: false
+        pattern: ['.{0,300}', '描述不能超过300字']
+      
+      - label: "标签"
+        name: "tags"
+        widget: "list"
+        allow_add: true
+        allow_order: true
+        collapsed: false
+        fields:
+          - { label: "标签", name: "标签", widget: "string" }
+        required: false
+      
+      - { label: "分类", name: "category", widget: "string", required: false }
+      
+      - { label: "是否草稿", name: "draft", widget: "boolean", default: false, required: false }
+      
+      - label: "封面图片"
+        name: "image"
+        widget: "string"
+        required: false
+        hint: "支持相对路径如 ./images/firefly2.webp 或完整URL"
+        pattern: ['^(https?://|./)', '请输入有效的URL或相对路径']
+      
+      - { label: "作者", name: "author", widget: "string", required: false }
       
       # 正文内容
       - label: "正文内容"
@@ -48,8 +81,7 @@ collections:
           - bulleted-list
           - numbered-list
           - quote
-          - image
-          - code-block
         editor_components: 
-          - image
           - code-block
+        required: true
+        hint: "支持Markdown格式，使用 ::github{repo='...'} 等特殊语法"
