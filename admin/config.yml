@@ -1,72 +1,102 @@
 backend:
   name: github
-  repo: 你的GitHub用户名/你的仓库名  # 例如：zhanxx81201/firefly-blog
-  branch: main
+  repo: zuqiu2024/zxx
+  branch: master
   base_url: https://zhanxx81201.dpdns.org
   auth_endpoint: api/auth
 
-# 媒体文件存储
 media_folder: "public/images"
 public_folder: "/images"
 
-# 内容集合 - 精确匹配你的文章格式
 collections:
   - name: "posts"
     label: "博客文章"
     folder: "src/content/posts"
     create: true
     slug: "{{slug}}"
-    identifier_field: "title"
     format: "frontmatter-md"
     extension: "md"
     
-    # 按发表日期排序
+    # 排序方式
     sortable_fields: ["published"]
     sort: "published"
     order: "descending"
     
-    # 关键：完全匹配你的文章字段
+    # 字段配置（完全匹配你的文章格式）
     fields:
-      - { label: "标题", name: "title", widget: "string", required: true }
+      # 标题
+      - label: "标题"
+        name: "title"
+        widget: "string"
+        required: true
+        pattern: ['.{3,}', '标题至少需要3个字符']
       
+      # 发布日期
       - label: "发布日期"
         name: "published"
         widget: "datetime"
         format: "YYYY-MM-DD"
         date_format: "YYYY-MM-DD"
-        time_format: false  # 不要时间部分
+        time_format: false
+        default: "{{now}}"
         required: true
       
-      - { label: "是否置顶", name: "pinned", widget: "boolean", default: false, required: false }
+      # 是否置顶
+      - label: "是否置顶"
+        name: "pinned"
+        widget: "boolean"
+        default: false
+        required: false
       
-      - label: "描述"
+      # 描述
+      - label: "文章描述"
         name: "description"
         widget: "text"
         required: false
-        pattern: ['.{0,300}', '描述不能超过300字']
+        hint: "文章简短描述，用于SEO和文章列表展示"
       
-      - label: "标签"
+      # 标签（两种格式都支持）
+      - label: "文章标签"
         name: "tags"
         widget: "list"
         allow_add: true
-        allow_order: true
         collapsed: false
-        fields:
-          - { label: "标签", name: "标签", widget: "string" }
+        field: 
+          label: "标签名"
+          name: "tag"
+          widget: "string"
         required: false
       
-      - { label: "分类", name: "category", widget: "string", required: false }
-      
-      - { label: "是否草稿", name: "draft", widget: "boolean", default: false, required: false }
-      
-      - label: "封面图片"
-        name: "image"
+      # 分类
+      - label: "文章分类"
+        name: "category"
         widget: "string"
         required: false
-        hint: "支持相对路径如 ./images/firefly2.webp 或完整URL"
-        pattern: ['^(https?://|./)', '请输入有效的URL或相对路径']
       
-      - { label: "作者", name: "author", widget: "string", required: false }
+      # 是否草稿
+      - label: "是否草稿"
+        name: "draft"
+        widget: "boolean"
+        default: false
+        required: false
+      
+      # 封面图片
+      - label: "封面图片"
+        name: "image"
+        widget: "image"
+        required: false
+        choose_url: true
+        hint: "上传图片或输入图片URL"
+        media_library:
+          config:
+            multiple: false
+      
+      # 作者
+      - label: "作者"
+        name: "author"
+        widget: "string"
+        default: "展"
+        required: false
       
       # 正文内容
       - label: "正文内容"
@@ -81,7 +111,10 @@ collections:
           - bulleted-list
           - numbered-list
           - quote
+          - image
+          - code-block
         editor_components: 
+          - image
           - code-block
         required: true
-        hint: "支持Markdown格式，使用 ::github{repo='...'} 等特殊语法"
+        hint: "支持Markdown和Firefly特殊语法，如 ::github{repo='...'}"
