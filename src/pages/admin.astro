@@ -1,63 +1,11 @@
 ---
-// src/pages/admin.astro
-// 告诉 Astro 不要预渲染此页面，因为它需要处理动态重定向
 export const prerender = false;
 ---
-
-<!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>正在进入后台...</title>
-    <!-- 方法1：使用HTML meta标签立即重定向 -->
-    <meta http-equiv="refresh" content="0; url=/admin/index.html">
-    <!-- 方法2：内联JavaScript作为备用方案 -->
-    <script>
-        // 如果meta刷新未生效，则用JS跳转
-        window.location.href = '/admin/index.html';
-    </script>
-    <style>
-        body {
-            font-family: sans-serif;
-            text-align: center;
-            padding: 50px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .message-box {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 30px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-        a {
-            color: #ffdd40;
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            border: 2px solid #ffdd40;
-            border-radius: 5px;
-        }
-        a:hover {
-            background-color: #ffdd40;
-            color: #333;
-        }
-    </style>
+    <meta http-equiv="refresh" content="0; url=https://zhanxx1.de5.net/admin/index.html">
 </head>
 <body>
-    <div class="message-box">
-        <h1>🚀 正在进入博客管理后台</h1>
-        <p>请稍候，页面将自动跳转...</p>
-        <p>如果页面没有自动跳转，请点击下方链接：</p>
-        <!-- 方法3：提供一个显式的手动链接 -->
-        <a href="/admin/index.html">点击手动进入后台</a>
-    </div>
+    <p>正在跳转到后台管理系统...</p>
 </body>
 </html>
