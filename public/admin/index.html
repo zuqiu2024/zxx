@@ -1,17 +1,157 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>博客后台</title>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firefly 博客管理系统</title>
+    <!-- 加载 Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <!-- 基础样式，确保内容可见 -->
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        h1 { color: #2d3748; margin-bottom: 15px; }
+        p { color: #4a5568; margin-bottom: 10px; }
+        .info-box {
+            background: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 0.95em;
+        }
+        .info-box ul { padding-left: 20px; }
+        .status-box {
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 8px;
+            background: #edf2f7;
+        }
+        #status-loading { color: #2b6cb0; }
+        #status-error { 
+            color: #c53030; 
+            background: #fed7d7; 
+            padding: 15px;
+            border-radius: 6px;
+            display: none; /* 默认隐藏 */
+            text-align: left;
+            font-family: monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+        .site-badge {
+            display: inline-block;
+            background: #4299e1;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+        hr { border: none; height: 1px; background: #e2e8f0; margin: 25px 0; }
+    </style>
 </head>
 <body>
-  <script>
-    // 自动初始化CMS
-    if (typeof CMS !== 'undefined') {
-      CMS.init();
-    }
-  </script>
+    <div class="container">
+        <h1>🚀 Firefly 博客管理系统</h1>
+        <p>基于 Decap CMS，文章将自动保存至您的 GitHub 仓库。</p>
+        <div class="site-badge">zhanxx81201.dpdns.org</div>
+
+        <div class="info-box">
+            <strong>📌 系统信息</strong>
+            <ul>
+                <li>仓库：<code>zuqiu2024/zxx</code> (分支: master)</li>
+                <li>文章目录：<code>src/content/posts</code></li>
+                <li>首次使用需完成 GitHub OAuth 授权。</li>
+            </ul>
+        </div>
+
+        <hr>
+
+        <!-- 状态显示区域 -->
+        <div class="status-box">
+            <h3>系统状态</h3>
+            <p id="status-loading">正在初始化后台管理系统...</p>
+            <div id="status-error"></div>
+        </div>
+
+        <p><small>如果长时间停留在此页面或看到错误，请截图此页面反馈。</small></p>
+    </div>
+
+    <!-- 核心脚本：加载并初始化 CMS，同时捕获错误 -->
+    <script>
+        // 定义状态显示元素
+        const statusLoadingEl = document.getElementById('status-loading');
+        const statusErrorEl = document.getElementById('status-error');
+
+        // 更新状态函数
+        function updateStatus(type, message) {
+            if (type === 'error') {
+                statusLoadingEl.style.display = 'none';
+                statusErrorEl.style.display = 'block';
+                statusErrorEl.innerHTML = '<strong>错误详情:</strong><br>' + message;
+                console.error('Decap CMS 初始化错误:', message);
+            } else if (type === 'loading') {
+                statusLoadingEl.textContent = message;
+            }
+        }
+
+        // 主初始化函数
+        function initCMS() {
+            updateStatus('loading', '正在检查 Decap CMS 库...');
+
+            // 1. 检查 CMS 全局变量是否已加载
+            if (typeof CMS === 'undefined') {
+                updateStatus('error', 'Decap CMS 核心库加载失败。可能原因：\n1. 网络问题，脚本未下载。\n2. unpkg.com 访问不稳定。\n3. 页面存在其他脚本冲突。\n建议：刷新页面或检查网络。');
+                return;
+            }
+            
+            updateStatus('loading', '库已加载，正在初始化配置...');
+
+            // 2. 尝试初始化 CMS
+            try {
+                // 这是最关键的初始化调用
+                CMS.init();
+                updateStatus('loading', '初始化成功！正在加载编辑器界面...');
+                // 如果成功，几秒后状态信息会被CMS生成的界面自然覆盖
+                console.log('Decap CMS 初始化成功。');
+            } catch (err) {
+                // 捕获初始化过程中的任何异常
+                updateStatus('error', '初始化过程发生异常：\n' + err.toString() + '\n\n堆栈跟踪：\n' + (err.stack || '无'));
+            }
+        }
+
+        // 页面加载后启动
+        document.addEventListener('DOMContentLoaded', initCMS);
+
+        // 设置一个超时检查，防止脚本静默失败
+        setTimeout(() => {
+            // 如果10秒后页面仍然显示“正在初始化...”，可能初始化卡住了
+            if (statusLoadingEl.style.display !== 'none' && statusErrorEl.style.display !== 'block') {
+                updateStatus('loading', '加载时间较长，请耐心等待或尝试刷新页面...');
+            }
+        }, 10000);
+    </script>
 </body>
 </html>
