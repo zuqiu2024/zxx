@@ -3,7 +3,7 @@ backend:
   repo: zuqiu2024/zxx
   branch: master
   base_url: https://zhanxx81201.dpdns.org
-  auth_endpoint: api/auth
+  auth_endpoint: /api/auth
 
 media_folder: "public/images"
 public_folder: "/images"
